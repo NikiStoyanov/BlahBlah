@@ -1,46 +1,41 @@
 #include <iostream>
 
 #include "ChatSystem.h"
+#include "CommandFactory.h"
 #include "String.h"
 
 void ChatSystem::run()
 {
     std::cout << "Welcome to BlahBlah! \n";
 
-    //CommandFactory* commandFactory = CommandFactory::getInstance();
+    CommandFactory* commandFactory = CommandFactory::getInstance();
+    UsersRepository* usersRepository = UsersRepository::getInstance();
+
+    usersRepository->loadFromTextFile();
 
     while (true)
     {
-        String command;
-
-        getline(std::cin, command);
-
-        Vector<String> tokens = command.split();
-
-        
-        if (tokens[0] ==  "exit")
+        String line;
+        getline(std::cin, line);
+        if (line.contains("exit"))
         {
             break;
         }
 
-        Command* command = commandFactory->readCommand(commandText);
+        Command* command = commandFactory->readCommand(line);
 
         if (!command)
         {
-            std::cout << "---------" << std::endl;
-            std::cout << "Invalid command!" << std::endl << std::endl;
+            std::cout << "Invalid command! If you need assistance, type get-help \n";
             continue;
         }
 
         command->execute();
+
         delete command;
     }
 
+    usersRepository->saveToTextFile();
+
     CommandFactory::freeInstance();
-
-    do 
-    {
-        readCommand();
-
-    } while (true);
 }

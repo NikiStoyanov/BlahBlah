@@ -1,25 +1,27 @@
 #pragma once
-#include <string>
+#include "String.h"
 
 class User
 {
 protected:
-    char* username;
-    char* password;
-    // std::vector<std::pair<std::string, std::vector<Message>>> chats;
+    String username;
+    String password;
+
+    User(const User&) = default;
+    User& operator=(const User&) = default;
 
 public:
-    User(const char* username, const char* password);
-    User(const User&) = delete;
-    User& operator=(const User&) = delete;
+    User(const String& username, const String& password);
+    virtual ~User() = default;
 
-    virtual ~User();
+    const String& getUsername() const;
+    bool checkPassword(const String& pass) const;
 
-    bool checkPassword(const char* password) const;
-    // virtual void viewChats() const;
-    // virtual void sendMessage(const std::string& receiver, const std::string& text);
-    // virtual void logout();
-    //
-    const char* const getUsername() const;
+    virtual bool isAdmin() const = 0;
+    virtual User* clone() const = 0;
+
+    virtual void saveToTextFile(std::ostream& os) const = 0;
+    virtual void saveToBinaryFile(std::ostream& os) const = 0;
+
+    static User* loadFromTextFile(std::istream& is);
 };
-

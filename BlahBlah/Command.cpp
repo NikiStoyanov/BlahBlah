@@ -1,7 +1,12 @@
+// Nikolay Stoyanov 2MI0600435
+
 #include "Command.h"
 
-// // Nikolay Stoyanov 2MI0600435
-//
+Command::Command()
+{
+	usersRepository = UsersRepository::getInstance();
+}
+
 // #include <iostream>
 //
 // #include "ChatSystem.h"
@@ -96,3 +101,5 @@
 // 	return -1;
 // 	std::cout << "Account not found. Create? (y/n)";
 // }
+
+

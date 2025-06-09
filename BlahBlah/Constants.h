@@ -8,3 +8,7 @@ constexpr uint8_t MAX_USERNAME_LENGTH = 32;
 constexpr uint8_t MAX_PASSWORD_LENGTH = 32;
 constexpr uint8_t MAX_USERS = 100;
 constexpr int MAX_TOKENS = 16;
+
+
+const char USERS_TEXT_FILE_NAME[] = "users.txt";
+const char USERS_BINARY_FILE_NAME[] = "users.dat";

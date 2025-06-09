@@ -3,6 +3,6 @@
 class ChatSystem
 {
 public:
-    void run();
+	void run();
 };
 

@@ -1,24 +1,32 @@
 #include "User.h"
-#include "Utils.h"
+#include "AdminUser.h"
+#include "RegularUser.h"
 
-User::User(const char* username, const char* password)
+User::User(const String& username, const String& password)
+	: username(username), password(password) {}
+
+bool User::checkPassword(const String& pass) const
 {
-	this->username = Utils::copyText(username);
-	this->password = Utils::copyText(password);
+	return this->password == pass;
 }
 
-User::~User()
+User* User::loadFromTextFile(std::istream& is)
 {
-	delete[] this->username;
-	delete[] this->password;
+    bool isAdmin;
+
+    if (!(is >> isAdmin)) return nullptr;
+
+    if (isAdmin)
+    {
+        return AdminUser::loadFromTextFile(is);
+    }
+    else
+    {
+        return RegularUser::loadFromTextFile(is);
+    }
 }
 
-bool User::checkPassword(const char* password) const
-{
-	return Utils::compareStrings(this->password, password);
-}
-
-const char* const User::getUsername() const
+const String& User::getUsername() const
 {
 	return this->username;
 }
