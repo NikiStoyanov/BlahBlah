@@ -1,15 +1,18 @@
+// Nikolay Stoyanov 2MI0600435
+
 #pragma once
 
 #include "Command.h"
 #include "String.h"
 
-class LogInUser : public Command
+class Login : public Command
 {
+private:
     String username;
     String password;
 
 public:
-    LogInUser(const String& username, const String& password);
+    Login(const String& username, const String& password);
 
     void execute() const override;
 

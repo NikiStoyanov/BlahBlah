@@ -31,6 +31,12 @@
     <Filter Include="Source Files\Commands">
       <UniqueIdentifier>{ae236441-6be4-42f2-ac6a-d4dbfb893e3c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Repositories">
+      <UniqueIdentifier>{896c2cc0-16fe-44ea-8fa7-1a3165755c7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Repositories">
+      <UniqueIdentifier>{3ebd7882-95bd-4d17-85d6-6881a999b6c7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BlahBlah.cpp">
@@ -39,22 +45,10 @@
     <ClCompile Include="ChatSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Command.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="String.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="CommandFactory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CreateAccount.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="UsersRepository.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LogInUser.cpp">
+    <ClCompile Include="Login.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="AdminUser.cpp">
@@ -66,6 +60,18 @@
     <ClCompile Include="RegularUser.cpp">
       <Filter>Source Files\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="CreateAccount.cpp">
+      <Filter>Source Files\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Command.cpp">
+      <Filter>Source Files\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandFactory.cpp">
+      <Filter>Source Files\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="UsersRepository.cpp">
+      <Filter>Source Files\Repositories</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ChatSystem.h">
@@ -76,9 +82,6 @@
     </ClInclude>
     <ClInclude Include="String.h">
       <Filter>Header Files\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="UsersRepository.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Constants.h">
       <Filter>Header Files\Utils</Filter>
@@ -92,7 +95,7 @@
     <ClInclude Include="Command.h">
       <Filter>Header Files\Commands</Filter>
     </ClInclude>
-    <ClInclude Include="LogInUser.h">
+    <ClInclude Include="Login.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AdminUser.h">
@@ -103,6 +106,9 @@
     </ClInclude>
     <ClInclude Include="CreateAccount.h">
       <Filter>Header Files\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="UsersRepository.h">
+      <Filter>Header Files\Repositories</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

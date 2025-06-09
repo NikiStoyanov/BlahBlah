@@ -1,3 +1,5 @@
+// Nikolay Stoyanov 2MI0600435
+
 #pragma once
 
 #include "Command.h"
@@ -5,6 +7,7 @@
 
 class CreateAccount : public Command
 {
+private:
     String username;
     String password;
 

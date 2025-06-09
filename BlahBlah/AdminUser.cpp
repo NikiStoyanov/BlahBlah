@@ -1,3 +1,5 @@
+// Nikolay Stoyanov 2MI0600435
+
 #include "AdminUser.h"
 
 AdminUser::AdminUser(const String& name, const String& pass, const String& adminCode)

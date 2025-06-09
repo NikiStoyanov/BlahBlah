@@ -1,5 +1,8 @@
-#include "String.h"
+// Nikolay Stoyanov 2MI0600435
+
 #include <iostream>
+
+#include "String.h"
 
 namespace Constants
 {

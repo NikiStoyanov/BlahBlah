@@ -1,16 +1,17 @@
-#include "LogInUser.h"
+// Nikolay Stoyanov 2MI0600435
 
 #include <iostream>
 
+#include "Login.h"
 #include "RegularUser.h"
 
-LogInUser::LogInUser(const String& username, const String& password)
+Login::Login(const String& username, const String& password)
 {
 	this->username = username;
 	this->password = password;
 }
 
-void LogInUser::execute() const
+void Login::execute() const
 {
 	if (usersRepository->getCurrentUserConst())
 	{
@@ -41,7 +42,7 @@ void LogInUser::execute() const
 	delete user;
 }
 
-bool LogInUser::validateInput() const
+bool Login::validateInput() const
 {
 	if (this->username.empty())
 	{
@@ -57,3 +58,29 @@ bool LogInUser::validateInput() const
 
 	return true;
 }
+
+
+// int32_t ChatSystem::login(const char* username, const char* password)
+// {
+// 	for (uint32_t i = 0; i < usersCount; i++)
+// 	{
+// 		bool isUsernameMatch = Utils::compareStrings(this->users[i].getUsername(), username);
+//
+// 		if (isUsernameMatch)
+// 		{
+// 			bool isPasswordMatch = this->users[i].checkPassword(password);
+// 			if (isPasswordMatch)
+// 			{
+// 				this->currentUser = &this->users[i];
+// 				return 1;
+// 			}
+// 			else
+// 			{
+// 				return 0;
+// 			}
+// 		}
+// 	}
+//
+// 	return -1;
+// 	std::cout << "Account not found. Create? (y/n)";
+// }

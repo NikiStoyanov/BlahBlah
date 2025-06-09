@@ -1,3 +1,5 @@
+// Nikolay Stoyanov 2MI0600435
+
 #include "RegularUser.h"
 
 RegularUser::RegularUser(const String& name, const String& pass)

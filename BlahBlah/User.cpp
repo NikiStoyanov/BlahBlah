@@ -1,3 +1,5 @@
+// Nikolay Stoyanov 2MI0600435
+
 #include "User.h"
 #include "AdminUser.h"
 #include "RegularUser.h"

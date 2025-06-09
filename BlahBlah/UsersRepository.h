@@ -1,4 +1,7 @@
+// Nikolay Stoyanov 2MI0600435
+
 #pragma once
+
 #include "User.h"
 #include "Vector.hpp"
 
@@ -22,22 +25,8 @@ public:
 	void saveToTextFile();
 	void loadFromTextFile();
 
-	//bool logUser(const String& username, const String& password);
-
-	//User* find(int userId);
-	//int find(const char* username) const;
 	void setCurrentUser(User* user);
 	User* getCurrentUser();
 	const User* getCurrentUserConst() const;
 	void logout();
-	
-	//void logOutUser();
-
-
-// public:
-// 	bool login(const std::string& username, const std::string& password);
-// 	void logout();
-// 	User* getCurrentUser() const;
-// 	bool deleteUser(const std::string& username);
-// 	const std::map<std::string, std::unique_ptr<User>>& getAllUsers() const;
 };

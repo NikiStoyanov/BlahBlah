@@ -1,4 +1,7 @@
+// Nikolay Stoyanov 2MI0600435
+
 #pragma once
+
 #include "User.h"
 
 class AdminUser : public User

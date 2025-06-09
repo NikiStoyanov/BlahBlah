@@ -1,7 +1,8 @@
-#include "CommandFactory.h"
+// Nikolay Stoyanov 2MI0600435
 
 #include <iostream>
 
+#include "CommandFactory.h"
 #include "CreateAccount.h"
 #include "String.h"
 
@@ -26,11 +27,15 @@ Command* CommandFactory::readCommand(const String& line) const
 {
 	Vector<String> tokens = line.split();
 
-	if (tokens[0] == "create-account" && tokens.size() == 3)
+	if (tokens.size() == 3 && tokens[0] == "create-account")
 	{
 		return new CreateAccount(tokens[1], tokens[2]);
 	}
-	else if (tokens[0] == "exit" && tokens.size() == 1)
+	else if (tokens.size() == 1 && tokens[0] == "login")
+	{
+
+	}
+	else if (tokens.size() == 1 && tokens[0] == "exit")
 	{
 
 	}

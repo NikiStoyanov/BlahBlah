@@ -1,3 +1,5 @@
+// Nikolay Stoyanov 2MI0600435
+
 #include <iostream>
 
 #include "ChatSystem.h"
