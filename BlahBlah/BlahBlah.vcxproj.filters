@@ -75,6 +75,9 @@
     <ClCompile Include="CreateAdmin.cpp">
       <Filter>Source Files\Commands</Filter>
     </ClCompile>
+    <ClCompile Include="Logout.cpp">
+      <Filter>Source Files\Commands</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ChatSystem.h">
@@ -114,6 +117,9 @@
       <Filter>Header Files\Commands</Filter>
     </ClInclude>
     <ClInclude Include="CreateAdmin.h">
+      <Filter>Header Files\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Logout.h">
       <Filter>Header Files\Commands</Filter>
     </ClInclude>
   </ItemGroup>

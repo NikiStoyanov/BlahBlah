@@ -11,6 +11,8 @@ private:
     String username;
     String password;
 
+    void listenForUserCreation() const;
+
 public:
     Login(const String& username, const String& password);
 

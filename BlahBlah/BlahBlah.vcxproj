@@ -135,6 +135,7 @@
     <ClCompile Include="CreateAccount.cpp" />
     <ClCompile Include="CreateAdmin.cpp" />
     <ClCompile Include="Login.cpp" />
+    <ClCompile Include="Logout.cpp" />
     <ClCompile Include="RegularUser.cpp" />
     <ClCompile Include="String.cpp" />
     <ClCompile Include="User.cpp" />
@@ -149,6 +150,7 @@
     <ClInclude Include="CreateAccount.h" />
     <ClInclude Include="CreateAdmin.h" />
     <ClInclude Include="Login.h" />
+    <ClInclude Include="Logout.h" />
     <ClInclude Include="RegularUser.h" />
     <ClInclude Include="String.h" />
     <ClInclude Include="User.h" />

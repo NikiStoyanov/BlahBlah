@@ -3,7 +3,26 @@
 #include <iostream>
 
 #include "Login.h"
+#include "CreateAccount.h"
 #include "RegularUser.h"
+
+void Login::listenForUserCreation() const
+{
+	std::cout << "Account not found. Create? (y/n): ";
+
+	String input;
+
+	getline(std::cin, input);
+
+	if (!input.empty() && (input[0] == 'y' || input[0] == 'Y'))
+	{
+		CreateAccount command(this->username, this->password);
+		command.execute();
+		return;
+	}
+
+	std::cout << "Login was not successful!\n";
+}
 
 Login::Login(const String& username, const String& password)
 	: username(username), password(password) {}
@@ -23,9 +42,9 @@ void Login::execute() const
 
 	User* user = usersRepository->findByUsername(username);
 
-	if (!user) 
+	if (!user)
 	{
-		std::cout << "Account not found. Create? (y/n)\n";
+		listenForUserCreation();
 		return;
 	}
 
@@ -55,29 +74,3 @@ bool Login::validateInput() const
 
 	return true;
 }
-
-
-// int32_t ChatSystem::login(const char* username, const char* password)
-// {
-// 	for (uint32_t i = 0; i < usersCount; i++)
-// 	{
-// 		bool isUsernameMatch = Utils::compareStrings(this->users[i].getUsername(), username);
-//
-// 		if (isUsernameMatch)
-// 		{
-// 			bool isPasswordMatch = this->users[i].checkPassword(password);
-// 			if (isPasswordMatch)
-// 			{
-// 				this->currentUser = &this->users[i];
-// 				return 1;
-// 			}
-// 			else
-// 			{
-// 				return 0;
-// 			}
-// 		}
-// 	}
-//
-// 	return -1;
-// 	std::cout << "Account not found. Create? (y/n)";
-// }
