@@ -6,10 +6,7 @@
 #include "RegularUser.h"
 
 Login::Login(const String& username, const String& password)
-{
-	this->username = username;
-	this->password = password;
-}
+	: username(username), password(password) {}
 
 void Login::execute() const
 {
@@ -24,22 +21,22 @@ void Login::execute() const
 		return;
 	}
 
-	// uint32_t usersCount = usersRepository
-	// for (uint32_t i = 0; i < user; ++i)
-	// {
-	// 	
-	// }
+	User* user = usersRepository->findByUsername(username);
 
-	User* user = new RegularUser(this->username, this->password);
-
-	if (user)
+	if (!user) 
 	{
-		//usersRepository->addUser(user);
+		std::cout << "Account not found. Create? (y/n)\n";
+		return;
 	}
 
-	std::cout << "Account created!\n";
+	if (!user->checkPassword(password))
+	{
+		std::cout << "Wrong credentials!\n";
+		return;
+	}
 
-	delete user;
+	usersRepository->setCurrentUser(user);
+	std::cout << "Welcome, " << user->getUsername() << "!\n";
 }
 
 bool Login::validateInput() const

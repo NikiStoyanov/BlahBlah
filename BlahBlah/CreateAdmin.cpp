@@ -2,17 +2,18 @@
 
 #include <iostream>
 
-#include "CreateAccount.h"
-#include "RegularUser.h"
+#include "CreateAdmin.h"
 
-CreateAccount::CreateAccount(const String& username, const String& password)
+#include "AdminUser.h"
+
+CreateAdmin::CreateAdmin(const String& username, const String& password)
 	:username(username), password(password) {}
 
-void CreateAccount::execute() const
+void CreateAdmin::execute() const
 {
 	if (usersRepository->getCurrentUserConst())
 	{
-		std::cout << "User is logged. Log out to register as a new user!\n" ;
+		std::cout << "User is logged. Log out to register as a new user!\n";
 		return;
 	}
 
@@ -21,13 +22,13 @@ void CreateAccount::execute() const
 		return;
 	}
 
-	RegularUser user(this->username, this->password);
+	AdminUser user(this->username, this->password, AdminUser::getNextAdminCode());
 
 	usersRepository->addUser(user);
 	std::cout << "Account created!\n";
 }
 
-bool CreateAccount::validateInput() const
+bool CreateAdmin::validateInput() const
 {
 	if (this->username.empty())
 	{

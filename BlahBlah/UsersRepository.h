@@ -25,6 +25,9 @@ public:
 	void saveToTextFile();
 	void loadFromTextFile();
 
+	User* findByUsername(const String& username);
+	const User* findByUsername(const String& username) const;
+
 	void setCurrentUser(User* user);
 	User* getCurrentUser();
 	const User* getCurrentUserConst() const;

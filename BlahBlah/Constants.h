@@ -12,5 +12,9 @@ constexpr uint8_t MAX_PASSWORD_LENGTH = 32;
 constexpr uint8_t MAX_USERS = 100;
 constexpr int MAX_TOKENS = 16;
 
+constexpr char ADMIN_USERNAME[] = "admin";
+constexpr char ADMIN_PASSWORD[] = "admin";
+constexpr char ADMIN_CODE[] = "users.txt";
+
 constexpr char USERS_TEXT_FILE_NAME[] = "users.txt";
 constexpr char USERS_BINARY_FILE_NAME[] = "users.dat";

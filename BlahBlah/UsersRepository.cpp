@@ -3,6 +3,8 @@
 #include "fstream"
 
 #include "UsersRepository.h"
+
+#include "AdminUser.h"
 #include "RegularUser.h"
 #include "Constants.h"
 
@@ -58,6 +60,8 @@ void UsersRepository::saveToTextFile()
 		throw std::exception("File could not be opened.");
 	}
 
+	os << AdminUser::getNextAdminCode() << '\n';
+
 	uint32_t usersCount = users.size();
 
 	for (uint32_t i = 0; i < usersCount; i++)
@@ -77,6 +81,10 @@ void UsersRepository::loadFromTextFile()
 		return;
 	}
 
+	uint32_t nextAdminCode;
+	is >> nextAdminCode;
+	AdminUser::setNextAdminCode(nextAdminCode);
+
 	while (true)
 	{
 		User* user = User::loadFromTextFile(is);
@@ -90,6 +98,36 @@ void UsersRepository::loadFromTextFile()
 	}
 
 	is.close();
+}
+
+User* UsersRepository::findByUsername(const String& username)
+{
+	uint32_t usersCount = users.size();
+
+	for (uint32_t i = 0; i < usersCount; i++)
+	{
+		if (users[i]->getUsername() == username)
+		{
+			return users[i];
+		}
+	}
+
+	return nullptr;
+}
+
+const User* UsersRepository::findByUsername(const String& username) const
+{
+	uint32_t usersCount = users.size();
+
+	for (uint32_t i = 0; i < usersCount; i++)
+	{
+		if (users[i]->getUsername() == username)
+		{
+			return users[i];
+		}
+	}
+
+	return nullptr;
 }
 
 void UsersRepository::setCurrentUser(User* user)

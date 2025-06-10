@@ -7,10 +7,11 @@
 class AdminUser : public User
 {
 private:
-    String adminCode;
+    static uint32_t nextAdminCode;
+    uint32_t adminCode;
 
 public:
-    AdminUser(const String& name, const String& pass, const String& adminCode);
+    AdminUser(const String& name, const String& pass, uint32_t adminCode);
 
     bool isAdmin() const override;
 
@@ -21,4 +22,7 @@ public:
     void saveToBinaryFile(std::ostream& os) const override;
 
     static User* loadFromTextFile(std::istream& is);
+
+    static uint32_t getNextAdminCode();
+    static void setNextAdminCode(uint32_t newCode);
 };
