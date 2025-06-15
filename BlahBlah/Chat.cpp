@@ -1,12 +1,11 @@
 #include "Chat.h"
 
+#include "GroupChat.h"
+
 uint32_t Chat::nextChatId = 1;
 
 Chat::Chat(uint32_t id, const Vector<String>& members)
-{
-	this->id = id;
-	this->members = members;
-}
+	: id(id), members(members) {}
 
 Chat::Chat(const String& firstUsername, const String& secondUsername)
 {
@@ -15,9 +14,9 @@ Chat::Chat(const String& firstUsername, const String& secondUsername)
 	this->members.push_back(secondUsername);
 }
 
-uint32_t Chat::getId() const
+bool Chat::isGroup() const
 {
-	return this->id;
+	return false;
 }
 
 uint32_t Chat::getNextChatId()
@@ -33,6 +32,21 @@ void Chat::setNextChatId(uint32_t newId)
 	}
 }
 
+uint32_t Chat::getId() const
+{
+	return this->id;
+}
+
+const Vector<String>& Chat::getMembers() const
+{
+	return this->members;
+}
+
+const Vector<Message>& Chat::getMessages() const
+{
+	return this->messages;
+}
+
 Chat* Chat::clone() const
 {
 	return new Chat(*this);
@@ -43,18 +57,35 @@ void Chat::addMessage(const Message& msg)
 	this->messages.push_back(msg);
 }
 
-const Vector<Message>& Chat::getMessages() const
+void Chat::saveMessagesToTextFile(std::ostream& ofs) const
 {
-	return this->messages;
+	ofs << messages.size() << '\n';
+	for (uint32_t i = 0; i < messages.size(); i++)
+	{
+		messages[i].saveToTextFile(ofs);
+	}
 }
 
-const Vector<String>& Chat::getMembers() const
+void Chat::loadMessagesFromTextFile(std::istream& ifs)
 {
-	return this->members;
+	uint32_t count;
+	ifs >> count;
+	ifs.ignore();
+
+	for (uint32_t i = 0; i < count; ++i) 
+	{
+		Message msg = Message::loadFromTextFile(ifs);
+
+		if (!msg.getSender().empty()) 
+		{
+			messages.push_back(msg);
+		}
+	}
 }
 
 void Chat::saveToTextFile(std::ostream& ofs) const
 {
+	ofs << "INDIVIDUAL\n";
 	ofs << id << '\n';
 
 	uint32_t membersCount = members.size();
@@ -64,33 +95,47 @@ void Chat::saveToTextFile(std::ostream& ofs) const
 	}
 	ofs << '\n';
 
-	for (uint32_t i = 0; i < messages.size(); ++i)
-	{
-		messages[i].saveToTextFile(ofs);
-	}
+	saveMessagesToTextFile(ofs);
 }
 
 Chat* Chat::loadFromTextFile(std::istream& ifs)
 {
-	uint32_t id;
-	ifs >> id;
-	ifs.ignore();
+	String type;
+	getline(ifs, type);
 
-	String membersLine;
-	getline(ifs, membersLine);
-
-	Chat* chat = new Chat(id, membersLine.split());
-
-	while (!ifs.eof()) 
+	if (type == "GROUP") 
 	{
-		Message msg = Message::loadFromTextFile(ifs);
-		if (msg.getSender().empty())
-		{
-			continue;
-		}
+		return GroupChat::loadFromTextFile(ifs);
+	}
+	else if (type == "INDIVIDUAL") 
+	{
+		uint32_t id;
+		ifs >> id;
+		ifs.ignore();
 
-		chat->addMessage(msg);
+		String membersLine;
+		getline(ifs, membersLine);
+
+		Chat* chat = new Chat(id, membersLine.split());
+		chat->loadMessagesFromTextFile(ifs);
+		return chat;
 	}
 
-	return chat;
+	return nullptr;
+}
+
+String Chat::getDisplayName() const
+{
+	const Vector<String>& members = getMembers();
+	String result;
+
+	for (size_t i = 0; i < members.size(); ++i) 
+	{
+		result += members[i];
+		if (i != members.size() - 1) 
+		{
+			result += "-";
+		}
+	}
+	return result;
 }

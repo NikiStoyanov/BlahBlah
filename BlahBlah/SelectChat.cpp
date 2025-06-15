@@ -59,5 +59,5 @@ void SelectChat::execute() const
 
 bool SelectChat::validateInput() const
 {
-	return true;
+	return this->chatId > 0;
 }

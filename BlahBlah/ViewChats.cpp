@@ -30,17 +30,24 @@ void ViewChats::execute() const
 
         std::cout << chats[i]->getId() << ": ";
 
-        bool first = true;
-        for (uint32_t j = 0; j < members.size(); j++)
+        if (members.size() == 2)
         {
-            if (members[j] != currentUser->getUsername())
+            bool first = true;
+            for (uint32_t j = 0; j < members.size(); j++)
             {
-                if (!first)
-                    std::cout << ", ";
+                if (members[j] != currentUser->getUsername())
+                {
+                    if (!first)
+                        std::cout << ", ";
 
-                std::cout << members[j];
-                first = false;
+                    std::cout << members[j];
+                    first = false;
+                }
             }
+        }
+        else
+        {
+            std::cout << chats[i]->getDisplayName();
         }
 
         std::cout << "\n";

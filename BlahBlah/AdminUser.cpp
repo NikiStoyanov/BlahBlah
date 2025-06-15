@@ -27,10 +27,6 @@ void AdminUser::saveToTextFile(std::ostream& os) const
 	os << isAdmin() << ' ' << username << ' ' << password << ' ' << adminCode << '\n';
 }
 
-void AdminUser::saveToBinaryFile(std::ostream& os) const
-{
-}
-
 User* AdminUser::loadFromTextFile(std::istream& is)
 {
 	String username, password;

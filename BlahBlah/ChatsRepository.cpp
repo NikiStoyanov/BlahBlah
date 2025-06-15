@@ -5,6 +5,7 @@
 
 #include <iostream>
 
+#include "GroupChat.h"
 #include "UsersRepository.h"
 #include "Utils.h"
 
@@ -146,6 +147,11 @@ Vector<Chat*> ChatsRepository::getChatsByUsername(const String& username)
 	return filtered;
 }
 
+Vector<Chat*> ChatsRepository::getChats()
+{
+	return this->chats;;
+}
+
 bool ChatsRepository::isChatAlreadyCreated(const String& firstUsername, const String& secondUsername) const
 {
 	uint32_t chatsCount = chats.size();
@@ -197,6 +203,21 @@ bool ChatsRepository::isChatAlreadyCreated(const Chat& chat) const
     }
 
     return false;
+}
+
+bool ChatsRepository::removeChat(uint32_t chatId)
+{
+	for (uint32_t i = 0; i < chats.size(); i++)
+	{
+		if (chats[i]->getId() == chatId)
+		{
+			delete chats[i];
+			chats.erase(i);
+			return true;
+		}
+	}
+
+	return false;
 }
 
 ChatsRepository::~ChatsRepository()

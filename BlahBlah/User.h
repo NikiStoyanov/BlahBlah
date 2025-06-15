@@ -32,7 +32,6 @@ public:
     virtual User* clone() const = 0;
 
     virtual void saveToTextFile(std::ostream& os) const = 0;
-    virtual void saveToBinaryFile(std::ostream& os) const = 0;
 
     static User* loadFromTextFile(std::istream& is);
 };

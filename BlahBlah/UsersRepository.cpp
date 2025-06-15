@@ -168,6 +168,21 @@ void UsersRepository::logout()
 	currentUser = nullptr;
 }
 
+void UsersRepository::removeChatFromUser(const String& username, uint32_t chatId)
+{
+	User* user = this->findByUsername(username);
+	if (!user) return;
+
+	for (uint32_t i = 0; i < user->getChats().size(); i++)
+	{
+		if (user->getChats()[i]->getId() == chatId)
+		{
+			user->getChats().erase(i);
+			break;
+		}
+	}
+}
+
 UsersRepository::~UsersRepository()
 {
 	for (uint32_t i = 0; i < users.size(); i++)

@@ -25,9 +25,11 @@ public:
 	void saveToTextFiles();
 	void loadFromTextFiles();
 
+	Vector<Chat*> getChats();
 	Vector<Chat*> getChatsByUsername(const String& username);
 	bool isChatAlreadyCreated(const String& firstUsername, const String& secondUsername) const;
 	bool isChatAlreadyCreated(const Chat& chat) const;
+	bool removeChat(uint32_t chatId);
 
 	~ChatsRepository();
 };

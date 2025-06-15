@@ -33,6 +33,7 @@ public:
 	User* getCurrentUser();
 	const User* getCurrentUserConst() const;
 	void logout();
+	void removeChatFromUser(const String& username, uint32_t chatId);
 
 	~UsersRepository();
 };

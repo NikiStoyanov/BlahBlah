@@ -20,10 +20,6 @@ void RegularUser::saveToTextFile(std::ostream& os) const
 	os << isAdmin() << ' ' << username << ' ' << password << '\n';
 }
 
-void RegularUser::saveToBinaryFile(std::ostream& os) const
-{
-}
-
 User* RegularUser::loadFromTextFile(std::istream& is)
 {
 	String username, password;

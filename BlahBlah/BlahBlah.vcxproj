@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AddToGroup.cpp" />
     <ClCompile Include="AdminUser.cpp" />
     <ClCompile Include="BlahBlah.cpp" />
     <ClCompile Include="Chat.cpp" />
@@ -137,19 +138,28 @@
     <ClCompile Include="CreateAccount.cpp" />
     <ClCompile Include="CreateAdmin.cpp" />
     <ClCompile Include="CreateChat.cpp" />
+    <ClCompile Include="CreateGroupChat.cpp" />
+    <ClCompile Include="DeleteGroup.cpp" />
     <ClCompile Include="Exit.cpp" />
+    <ClCompile Include="GroupChat.cpp" />
+    <ClCompile Include="GroupStats.cpp" />
+    <ClCompile Include="KickFromGroup.cpp" />
+    <ClCompile Include="LeaveGroup.cpp" />
     <ClCompile Include="Login.cpp" />
     <ClCompile Include="Logout.cpp" />
     <ClCompile Include="Message.cpp" />
     <ClCompile Include="RegularUser.cpp" />
     <ClCompile Include="SelectChat.cpp" />
+    <ClCompile Include="SetGroupAdmin.cpp" />
     <ClCompile Include="String.cpp" />
     <ClCompile Include="User.cpp" />
     <ClCompile Include="UsersRepository.cpp" />
     <ClCompile Include="Utils.cpp" />
+    <ClCompile Include="ViewAllChats.cpp" />
     <ClCompile Include="ViewChats.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AddToGroup.h" />
     <ClInclude Include="AdminUser.h" />
     <ClInclude Include="Chat.h" />
     <ClInclude Include="ChatsRepository.h" />
@@ -160,17 +170,25 @@
     <ClInclude Include="CreateAccount.h" />
     <ClInclude Include="CreateAdmin.h" />
     <ClInclude Include="CreateChat.h" />
+    <ClInclude Include="CreateGroupChat.h" />
+    <ClInclude Include="DeleteGroup.h" />
     <ClInclude Include="Exit.h" />
+    <ClInclude Include="GroupChat.h" />
+    <ClInclude Include="GroupStats.h" />
+    <ClInclude Include="KickFromGroup.h" />
+    <ClInclude Include="LeaveGroup.h" />
     <ClInclude Include="Login.h" />
     <ClInclude Include="Logout.h" />
     <ClInclude Include="Message.h" />
     <ClInclude Include="RegularUser.h" />
     <ClInclude Include="SelectChat.h" />
+    <ClInclude Include="SetGroupAdmin.h" />
     <ClInclude Include="String.h" />
     <ClInclude Include="User.h" />
     <ClInclude Include="UsersRepository.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="Vector.hpp" />
+    <ClInclude Include="ViewAllChats.h" />
     <ClInclude Include="ViewChats.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

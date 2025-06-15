@@ -15,7 +15,5 @@ public:
 
     void saveToTextFile(std::ostream& os) const override;
 
-    void saveToBinaryFile(std::ostream& os) const override;
-
     static User* loadFromTextFile(std::istream& is);
 };
