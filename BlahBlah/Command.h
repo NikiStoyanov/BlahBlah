@@ -2,12 +2,14 @@
 
 #pragma once
 
+#include "ChatsRepository.h"
 #include "UsersRepository.h"
 
 class Command
 {
 protected:
 	UsersRepository* usersRepository;
+	ChatsRepository* chatsRepository;
 
 public:
 	Command();

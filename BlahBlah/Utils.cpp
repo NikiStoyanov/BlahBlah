@@ -1,28 +1,22 @@
 #include "Utils.h"
 
-uint32_t Utils::getTextLength(const char* text)
+String Utils::itoa(uint32_t value)
 {
-    uint32_t length = 0;
-    while (text[length] != '\0')
-    {
-        length++;
-    }
+	if (value == 0)
+	{
+		return String("0");
+	}
 
-    return length;
-}
+	String result;
 
-char* Utils::copyText(const char* source)
-{
-    uint32_t sourceLength = getTextLength(source);
+	while (value != 0)
+	{
+		char digit = '0' + (value % 10);
+		result += digit;
+		value /= 10;
+	}
 
-    char* destination = new char[sourceLength + 1];
+	result.reverse();
 
-    for (uint32_t i = 0; i < sourceLength; i++)
-    {
-        destination[i] = source[i];
-    }
-
-    destination[sourceLength] = '\0';
-
-    return destination;
+	return result;
 }

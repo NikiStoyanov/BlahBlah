@@ -19,8 +19,7 @@ public:
 	static UsersRepository* getInstance();
 	static void freeInstance();
 
-
-	bool isUsernameFree(const String& username);
+	bool isUsernameTaken(const String& username) const;
 	void addUser(const User& user);
 	void saveToTextFile();
 	void loadFromTextFile();
@@ -28,8 +27,12 @@ public:
 	User* findByUsername(const String& username);
 	const User* findByUsername(const String& username) const;
 
+	void assignChatToMembers(Chat* chat);
+
 	void setCurrentUser(User* user);
 	User* getCurrentUser();
 	const User* getCurrentUserConst() const;
 	void logout();
+
+	~UsersRepository();
 };

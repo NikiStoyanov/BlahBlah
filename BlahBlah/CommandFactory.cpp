@@ -5,9 +5,12 @@
 #include "CommandFactory.h"
 #include "CreateAccount.h"
 #include "CreateAdmin.h"
+#include "CreateChat.h"
+#include "Exit.h"
 #include "Login.h"
 #include "Logout.h"
 #include "String.h"
+#include "ViewChats.h"
 
 CommandFactory* CommandFactory::instance = nullptr;
 
@@ -28,7 +31,7 @@ void CommandFactory::freeInstance()
 
 Command* CommandFactory::readCommand(const String& line) const
 {
-	Vector<String> tokens = line.split();
+	const Vector<String> tokens = line.split();
 
 	if (tokens.size() == 3 && tokens[0] == "create-admin")
 	{
@@ -46,9 +49,17 @@ Command* CommandFactory::readCommand(const String& line) const
 	{
 		return new Logout();
 	}
+	else if (tokens.size() == 2 && tokens[0] == "create-chat")
+	{
+		return new CreateChat(tokens[1]);
+	}
+	else if (tokens.size() == 1 && tokens[0] == "view-chats")
+	{
+		return new ViewChats();
+	}
 	else if (tokens.size() == 1 && tokens[0] == "exit")
 	{
-
+		return new Exit();
 	}
 	else
 	{

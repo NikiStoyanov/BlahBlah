@@ -38,6 +38,7 @@ public:
 	const T& back() const;
 	T* data();
 	const T* data() const;
+	bool contains(const T& element) const;
 
 	// Capacity
 	bool empty() const;
@@ -264,6 +265,22 @@ template <typename T>
 const T* Vector<T>::data() const
 {
 	return elements;
+}
+
+template <typename T>
+bool Vector<T>::contains(const T& element) const
+{
+	uint32_t count = _size;
+
+	for (uint32_t i = 0; i < count; i++)
+	{
+		if (elements[i] == element)
+		{
+			return true;
+		}
+	}
+
+	return false;
 }
 
 // Capacity

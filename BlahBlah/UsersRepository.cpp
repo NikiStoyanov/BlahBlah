@@ -4,7 +4,10 @@
 
 #include "UsersRepository.h"
 
+#include <iostream>
+
 #include "AdminUser.h"
+#include "ChatsRepository.h"
 #include "RegularUser.h"
 #include "Constants.h"
 
@@ -29,21 +32,19 @@ void UsersRepository::freeInstance()
 	instance = nullptr;
 }
 
-bool UsersRepository::isUsernameFree(const String& username)
+bool UsersRepository::isUsernameTaken(const String& username) const
 {
 	uint32_t usersCount = this->users.size();
-
-	bool isUsernameFree = true;
 
 	for (uint32_t i = 0; i < usersCount; i++)
 	{
 		if (users[i]->getUsername() == username)
 		{
-			isUsernameFree = false;
+			return true;
 		}
 	}
 
-	return isUsernameFree;
+	return false;
 }
 
 void UsersRepository::addUser(const User& user)
@@ -53,23 +54,23 @@ void UsersRepository::addUser(const User& user)
 
 void UsersRepository::saveToTextFile()
 {
-	std::ofstream os(USERS_TEXT_FILE_NAME);
+	std::ofstream ofs(USERS_TEXT_FILE_NAME);
 
-	if (!os.is_open())
+	if (!ofs.is_open())
 	{
 		throw std::exception("File could not be opened.");
 	}
 
-	os << AdminUser::getNextAdminCode() << '\n';
+	ofs << AdminUser::getNextAdminCode() << '\n';
 
 	uint32_t usersCount = users.size();
 
 	for (uint32_t i = 0; i < usersCount; i++)
 	{
-		users[i]->saveToTextFile(os);
+		users[i]->saveToTextFile(ofs);
 	}
 
-	os.close();
+	ofs.close();
 }
 
 void UsersRepository::loadFromTextFile()
@@ -93,6 +94,9 @@ void UsersRepository::loadFromTextFile()
 		{
 			break;
 		}
+
+		ChatsRepository* chats = ChatsRepository::getInstance();
+		user->assignChats(chats->getChatsByUsername(user->getUsername()));
 
 		users.push_back(user);
 	}
@@ -130,6 +134,20 @@ const User* UsersRepository::findByUsername(const String& username) const
 	return nullptr;
 }
 
+void UsersRepository::assignChatToMembers(Chat* chat)
+{
+	const Vector<String>& members = chat->getMembers();
+
+	for (uint32_t i = 0; i < members.size(); ++i)
+	{
+		User* user = this->findByUsername(members[i]);
+		if (user)
+		{
+			user->addChat(chat);
+		}
+	}
+}
+
 void UsersRepository::setCurrentUser(User* user)
 {
 	currentUser = user;
@@ -150,63 +168,13 @@ void UsersRepository::logout()
 	currentUser = nullptr;
 }
 
-//
-// User* UsersRepository::find(int userId)
-// {
-// 	if (userId < 0)
-// 	{
-// 		return nullptr;
-// 	}
-//
-// 	unsigned usersCount = users.size();
-//
-// 	for (size_t i = 0; i < usersCount; i++)
-// 	{
-// 		if (users[i].getId() == userId)
-// 		{
-// 			return &users[i];
-// 		}
-// 	}
-//
-// 	return nullptr;
-// }
-//
-//
-//
-// LoginResult UsersRepository::logUser(const char* username, const char* password)
-// {
-// 	int userIndex = find(username);
-//
-// 	if (userIndex < 0)
-// 	{
-// 		return LoginResult::UsernameNotFound;
-// 	}
-//
-// 	if (users[userIndex].matchPassword(password))
-// 	{
-// 		loggedUserIndex = userIndex;
-// 		return LoginResult::Success;
-// 	}
-//
-// 	return LoginResult::WrongPassword;
-// }
-//
-// int UsersRepository::find(const char* username) const
-// {
-// 	unsigned usersCount = users.size();
-//
-// 	for (size_t index = 0; index < usersCount; index++)
-// 	{
-// 		if (!strcmp(users[index].getUsername().c_str(), username))
-// 		{
-// 			return index;
-// 		}
-// 	}
-//
-// 	return -1;
-// }
-//
-// void UsersRepository::logOutUser()
-// {
-// 	loggedUserIndex = -1;
-// }
+UsersRepository::~UsersRepository()
+{
+	for (uint32_t i = 0; i < users.size(); i++)
+	{
+		std::cout << "Deleting user: " << users[i]->getUsername() << '\n';
+		delete users[i];
+	}
+
+	users.clear();
+}

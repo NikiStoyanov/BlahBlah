@@ -32,3 +32,18 @@ const String& User::getUsername() const
 {
 	return this->username;
 }
+
+void User::addChat(Chat* chat)
+{
+    this->chats.push_back(chat);
+}
+
+void User::assignChats(const Vector<Chat*>& chats)
+{
+    this->chats = chats;
+}
+
+Vector<Chat*> User::getChats() const
+{
+    return this->chats;
+}

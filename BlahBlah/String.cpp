@@ -850,6 +850,18 @@ Vector<String> String::split(char delimiter) const
 	return result;
 }
 
+void String::reverse()
+{
+	uint32_t halfLength = _size / 2;
+
+	for (uint32_t i = 0; i < halfLength; i++)
+	{
+		char temp = text[i];
+		text[i] = text[_size - 1 - i];
+		text[_size - 1 - i] = temp;
+	}
+}
+
 String operator+(const String& lhs, const String& rhs)
 {
 	String result;

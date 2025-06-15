@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "Chat.h"
 #include "String.h"
 
 class User
@@ -9,6 +10,8 @@ class User
 protected:
     String username;
     String password;
+
+    Vector<Chat*> chats;
 
     User(const User&) = default;
     User& operator=(const User&) = default;
@@ -18,6 +21,11 @@ public:
     virtual ~User() = default;
 
     const String& getUsername() const;
+
+    void addChat(Chat* chat);
+    Vector<Chat*> getChats() const;
+    void assignChats(const Vector<Chat*>& chats);
+
     bool checkPassword(const String& pass) const;
 
     virtual bool isAdmin() const = 0;

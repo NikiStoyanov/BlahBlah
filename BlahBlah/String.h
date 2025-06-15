@@ -82,6 +82,8 @@ public:
 	String substr(uint32_t pos = 0, uint32_t count = 0) const;
 
 	Vector<String> split(char delimiter = ' ') const;
+
+	void reverse();
 };
 
 String operator+(const String& lhs, const String& rhs);

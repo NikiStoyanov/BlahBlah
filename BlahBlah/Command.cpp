@@ -5,4 +5,5 @@
 Command::Command()
 {
 	usersRepository = UsersRepository::getInstance();
+	chatsRepository = ChatsRepository::getInstance();
 }

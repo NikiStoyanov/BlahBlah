@@ -6,29 +6,37 @@
 #include "CommandFactory.h"
 #include "String.h"
 
+void ChatSystem::stop()
+{
+    ChatSystem::isRunning = false;
+}
+
+bool ChatSystem::running()
+{
+    return ChatSystem::isRunning;
+}
+
 void ChatSystem::run()
 {
     std::cout << "Welcome to BlahBlah! \n";
 
     CommandFactory* commandFactory = CommandFactory::getInstance();
     UsersRepository* usersRepository = UsersRepository::getInstance();
+    ChatsRepository* chatsRepository = ChatsRepository::getInstance();
 
+    chatsRepository->loadFromTextFiles();
     usersRepository->loadFromTextFile();
 
-    while (true)
+    while (ChatSystem::running())
     {
         String line;
         getline(std::cin, line);
-        if (line.contains("exit"))
-        {
-            break;
-        }
 
         Command* command = commandFactory->readCommand(line);
 
         if (!command)
         {
-            std::cout << "Invalid command! If you need assistance, type get-help \n";
+            std::cout << "Invalid command!\n";
             continue;
         }
 
@@ -38,6 +46,11 @@ void ChatSystem::run()
     }
 
     usersRepository->saveToTextFile();
+    chatsRepository->saveToTextFiles();
 
+    UsersRepository::freeInstance();
+    ChatsRepository::freeInstance();
     CommandFactory::freeInstance();
 }
+
+bool ChatSystem::isRunning = true;

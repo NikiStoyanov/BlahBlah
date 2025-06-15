@@ -41,7 +41,7 @@ bool CreateAdmin::validateInput() const
 		return false;
 	}
 
-	if (!usersRepository->isUsernameFree(this->username))
+	if (usersRepository->isUsernameTaken(this->username))
 	{
 		std::cout << "Username is taken. Try another one.\n";
 		return false;

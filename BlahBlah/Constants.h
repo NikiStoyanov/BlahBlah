@@ -14,7 +14,9 @@ constexpr int MAX_TOKENS = 16;
 
 constexpr char ADMIN_USERNAME[] = "admin";
 constexpr char ADMIN_PASSWORD[] = "admin";
-constexpr char ADMIN_CODE[] = "users.txt";
 
 constexpr char USERS_TEXT_FILE_NAME[] = "users.txt";
 constexpr char USERS_BINARY_FILE_NAME[] = "users.dat";
+
+constexpr char CHATS_LIST_TEXT_FILE_NAME[] = "chats_list.txt";
+constexpr char CHATS_LIST_BINARY_FILE_NAME[] = "chats_list.dat";

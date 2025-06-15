@@ -19,6 +19,7 @@ void Logout::execute() const
     usersRepository->setCurrentUser(nullptr);
 
     usersRepository->saveToTextFile();
+    chatsRepository->saveToTextFiles();
 }
 
 bool Logout::validateInput() const
