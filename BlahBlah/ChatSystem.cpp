@@ -48,9 +48,9 @@ void ChatSystem::run()
     usersRepository->saveToTextFile();
     chatsRepository->saveToTextFiles();
 
-    UsersRepository::freeInstance();
     ChatsRepository::freeInstance();
-    CommandFactory::freeInstance();
+    UsersRepository::freeInstance();
+    CommandFactory::freeInstance();    
 }
 
 bool ChatSystem::isRunning = true;

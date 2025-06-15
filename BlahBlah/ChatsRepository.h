@@ -19,6 +19,7 @@ public:
 	static void freeInstance();
 
 	Chat* addChat(const Chat& chat);
+	Chat* getChatById(uint32_t id) const;
 
 	void saveChatsList();
 	void saveToTextFiles();

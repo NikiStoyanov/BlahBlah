@@ -172,7 +172,6 @@ UsersRepository::~UsersRepository()
 {
 	for (uint32_t i = 0; i < users.size(); i++)
 	{
-		std::cout << "Deleting user: " << users[i]->getUsername() << '\n';
 		delete users[i];
 	}
 

@@ -63,30 +63,43 @@ public:
 template <typename T>
 void Vector<T>::freeDynamicMemory()
 {
-	this->_capacity = 0;
-	this->_size = 0;
 	delete[] elements;
+	elements = nullptr;
+	_size = 0;
+	_capacity = 0;
 }
 
 template <typename T>
 void Vector<T>::copyDynamicMemory(const Vector<T>& other)
 {
-	this->_size = other._size;
-	_capacity = other._size;
+	_size = other._size;
+	_capacity = other._capacity;
+
+	if (_capacity == 0) 
+	{
+		_capacity = 1;
+	}
+
 	elements = new T[_capacity];
 
-	for (uint32_t i = 0; i < other._size; i++)
+	for (uint32_t i = 0; i < _size; i++)
 	{
 		elements[i] = other.elements[i];
 	}
+		
 }
 
 template <typename T>
 void Vector<T>::reallocate()
 {
-	this->_capacity *= REALLOCATE_FACTOR;
+	if (_capacity == 0)
+	{
+		_capacity = 1;
+	}
 
-	T* newElements = new T[this->_capacity];
+	_capacity *= REALLOCATE_FACTOR;
+
+	T* newElements = new T[_capacity];
 
 	for (uint32_t i = 0; i < _size; i++)
 	{

@@ -142,6 +142,7 @@
     <ClCompile Include="Logout.cpp" />
     <ClCompile Include="Message.cpp" />
     <ClCompile Include="RegularUser.cpp" />
+    <ClCompile Include="SelectChat.cpp" />
     <ClCompile Include="String.cpp" />
     <ClCompile Include="User.cpp" />
     <ClCompile Include="UsersRepository.cpp" />
@@ -164,6 +165,7 @@
     <ClInclude Include="Logout.h" />
     <ClInclude Include="Message.h" />
     <ClInclude Include="RegularUser.h" />
+    <ClInclude Include="SelectChat.h" />
     <ClInclude Include="String.h" />
     <ClInclude Include="User.h" />
     <ClInclude Include="UsersRepository.h" />

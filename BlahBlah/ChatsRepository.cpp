@@ -35,6 +35,23 @@ Chat* ChatsRepository::addChat(const Chat& chat)
 	return cloned;
 }
 
+Chat* ChatsRepository::getChatById(uint32_t id) const
+{
+	uint32_t chatsCount = chats.size();
+
+	for (uint32_t i = 0; i < chatsCount; i++)
+	{
+		Chat* chat = chats[i];
+
+		if (chat->getId() == id)
+		{
+			return chat;
+		}
+	}
+
+	return nullptr;
+}
+
 void ChatsRepository::saveChatsList()
 {
 	std::ofstream ofs(CHATS_LIST_TEXT_FILE_NAME);

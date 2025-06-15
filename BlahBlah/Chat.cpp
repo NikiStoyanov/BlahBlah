@@ -38,6 +38,16 @@ Chat* Chat::clone() const
 	return new Chat(*this);
 }
 
+void Chat::addMessage(const Message& msg)
+{
+	this->messages.push_back(msg);
+}
+
+const Vector<Message>& Chat::getMessages() const
+{
+	return this->messages;
+}
+
 const Vector<String>& Chat::getMembers() const
 {
 	return this->members;
@@ -53,6 +63,11 @@ void Chat::saveToTextFile(std::ostream& ofs) const
 		ofs << members[i] << ' ';
 	}
 	ofs << '\n';
+
+	for (uint32_t i = 0; i < messages.size(); ++i)
+	{
+		messages[i].saveToTextFile(ofs);
+	}
 }
 
 Chat* Chat::loadFromTextFile(std::istream& ifs)
@@ -65,6 +80,17 @@ Chat* Chat::loadFromTextFile(std::istream& ifs)
 	getline(ifs, membersLine);
 
 	Chat* chat = new Chat(id, membersLine.split());
+
+	while (!ifs.eof()) 
+	{
+		Message msg = Message::loadFromTextFile(ifs);
+		if (msg.getSender().empty())
+		{
+			continue;
+		}
+
+		chat->addMessage(msg);
+	}
 
 	return chat;
 }

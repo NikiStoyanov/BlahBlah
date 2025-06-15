@@ -9,7 +9,9 @@
 #include "Exit.h"
 #include "Login.h"
 #include "Logout.h"
+#include "SelectChat.h"
 #include "String.h"
+#include "Utils.h"
 #include "ViewChats.h"
 
 CommandFactory* CommandFactory::instance = nullptr;
@@ -56,6 +58,10 @@ Command* CommandFactory::readCommand(const String& line) const
 	else if (tokens.size() == 1 && tokens[0] == "view-chats")
 	{
 		return new ViewChats();
+	}
+	else if (tokens.size() == 2 && tokens[0] == "select-chat")
+	{
+		return new SelectChat(Utils::atoi(tokens[1]));
 	}
 	else if (tokens.size() == 1 && tokens[0] == "exit")
 	{

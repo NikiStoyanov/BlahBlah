@@ -13,7 +13,7 @@ private:
     static uint32_t nextChatId;
     uint32_t id;
 
-    Vector<Message*> messages;
+    Vector<Message> messages;
     Vector<String> members;
 
     Chat(uint32_t id, const Vector<String>& members);
@@ -25,8 +25,8 @@ public:
 
     Chat* clone() const;
 
-    void addMessage(const String& sender, const String& content);
-    const Vector<Message*>& getMessages() const;
+    void addMessage(const Message& msg);
+    const Vector<Message>& getMessages() const;
 
     uint32_t getId() const;
     const Vector<String>& getMembers() const;

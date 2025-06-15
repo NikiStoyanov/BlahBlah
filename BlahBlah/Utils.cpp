@@ -20,3 +20,19 @@ String Utils::itoa(uint32_t value)
 
 	return result;
 }
+
+uint32_t Utils::atoi(String value)
+{
+	uint32_t length = value.size();
+
+	uint32_t number = 0;
+
+	for (int i = 0; i < length; i++)
+	{
+		number *= 10;
+
+		number += (value[i] - '0');
+	}
+
+	return number;
+}
